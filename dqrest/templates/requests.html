@@ -1,0 +1,71 @@
+<!doctype html>
+<head>
+<title>DQuality - Requests</title>
+<style>
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+    font-family: Sans-Serif;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+</head>
+<body style="width:70%">
+    <h1>Data Quality Requests</h1>
+    <table>
+        <tr>
+            <th>Submitted by</th>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Done</th>
+            <th>Submit timestamp</th>
+            <th>Completion timestamp</th>
+        </tr>
+        {% for t in request_list %}
+        <tr>
+            <td>{{ t[0] }}</td>
+            {% if t[1]=='PROFILING' %}
+            <td><a href={{ url_for('profiling', uuid=t[2]) }}>{{ t[2] }}</a></td>
+            {% else %}
+            <td><a href={{ url_for('assessment', uuid=t[2]) }}>{{ t[2] }}</a></td>
+            {% endif %}
+            <td>{{ t[1] }}</td>
+            {% if t[6] %}
+            <td><a href={{ url_for('errorlog', uuid=t[2]) }}>ERROR</a></td>
+            {% else %}
+            <td>{{ 'YES' if t[3] else 'NO'}}</td>
+            {% endif %}
+            <td>{{ t[4] }}</td>
+            <td>
+            {% if t[5] %}
+            {{ t[5] }}
+            {% else %}
+            STILL RUNNING
+            {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+

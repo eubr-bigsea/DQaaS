@@ -1,0 +1,27 @@
+{
+    "username": "<username>",
+    "input": "hdfs://namenode:8020/DQ_demo/result;*",
+    "output": "hdfs://namenode:8020/DQ_demo/result/assessment",
+    "sel_attributes": [ {"name":"CODLINHA", "intervals":[], "selected":[]},
+                        {"name":"CODVEICULO", "intervals":[], "selected":[]},
+                        {"name":"NUMEROCARTAO", "intervals":[], "selected":[]},
+                        {"name":"DATAUTILIZACAO", "intervals":[], "selected":[]},
+                        {"name":"NOMELINHA", "intervals":[], "selected":[]}],
+    "g_attributes" : [ ["CODLINHA","CODVEICULO"], ["CODVEICULO"],["NUMEROCARTAO"] ],
+    "dimensions" : [ {"name":"Volume","granularity":["global","value"]},
+                    {"name":"Precision","granularity":["global","attribute","value"]},
+                    {"name":"Accuracy","granularity":["global","attribute","value"]},
+                    {"name":"Completeness_Missing","granularity":["global","attribute","value","tuple"]},
+                    {"name":"Distinctness","granularity":["global","attribute"]},
+                    {"name":"Timeliness","granularity":["global","attribute","value","tuple"],"volatility":["17500"]},
+                    {"name":"Completeness_Frequency","granularity":["global","attribute","value"]},
+                    {"name":"Completeness_Population","granularity":["attribute"]},
+                    {"name":"Consistency","granularity":["attribute","value","tuple"], "force" : "True"}],
+
+
+    "mean_acc" : "0002075900",
+    "interval_acc" : "1000",
+    "add_con_rules" : [ { "antecedent": ["CODLINHA","CODVEICULO"], "consequent": ["DATAUTILIZACAO"] },{ "antecedent": ["CODLINHA"], "consequent": ["CODVEICULO"] } ],
+    "source_summary":"0",
+    "con_rules":["hdfs://namenode:8020/DQ_demo/association"]
+}

@@ -1,0 +1,14 @@
+hdfs://namenode:8020/DQ_demo/result;*
+hdfs://namenode:8020/DQ_demo/result/assessment
+CODLINHA;CODVEICULO;NUMEROCARTAO;DATAUTILIZACAO;NOMELINHA
+CODLINHA,CODVEICULO;CODVEICULO;NUMEROCARTAO
+;;;;
+;;;;
+Volume;Precision;Accuracy;Completeness_Missing;Distinctness;Timeliness;Completeness_Frequency;Completeness_Population;Consistency-R
+17500
+0002075900
+1000
+CODLINHA,CODVEICULO:DATAUTILIZACAO;CODLINHA:CODVEICULO
+global,value;global,attribute,value;global,attribute,value;global,attribute,value,tuple;global,attribute;global,attribute,value,tuple;global,attribute,value;attribute;attribute,value,tuple
+0
+hdfs://namenode:8020/DQ_demo/association

@@ -1,0 +1,120 @@
+<!doctype html>
+<head>
+<title>DQuality - Profiling details</title>
+<style>
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+    font-family: Sans-Serif;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+.error{
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+color: #FFFFFF;
+background-color: #d30c37;
+}
+
+.info{
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+color: #FFFFFF;
+background-color: #4CAF50;
+}
+</style>
+</head>
+<body>
+    <h1>DQProfiling</h1>
+    <h3>{{ profiling_data['uuid'] }}</h3> 
+    <table>
+      <tr>
+        <th>Submitted by:</th>
+        <td>{{ profiling_data['user_id'] }}</td>
+      </tr>
+      <tr>
+        <th>Submit timestamp:</th>
+        <td>{{ profiling_data['submit_timestamp'] }}</td>
+      </tr>
+      <tr>
+        <th>Completion timestamp:</th>
+        {% if profiling_data['done'] %}
+        <td>{{ profiling_data['completed_timestamp'] }}</td>
+        {% else %}
+        <td>STILL RUNNING</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <th>Consistency rules:</th>
+        <td>{{ profiling_data['args_dict']['consistency_rules'] }}</td>
+      </tr>
+      {% if 'input' in profiling_data['args_dict'] %}
+      <tr>
+        <th>Input:</th>
+        <td>{{ profiling_data['args_dict']['input'] }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <th>From:</th>
+        <td>{{ profiling_data['args_dict']['from'] }}</td>
+      </tr>
+      <tr>
+        <th>To:</th>
+        <td>{{ profiling_data['args_dict']['to'] }}</td>
+      </tr>
+      <tr>
+        <th>Interval:</th>
+        <td>{{ profiling_data['args_dict']['interval'] }}</td>
+      </tr>
+      {% endif %}
+      <tr>
+        <th>Output:</th>
+        <td>{{ profiling_data['args_dict']['output'] }}</td>
+      </tr>
+      <tr>
+        <th>Time format:</th>
+        <td>{{ profiling_data['args_dict']['time_format'] }}</td>
+      </tr>
+      <tr>
+        <th>Timeliness</th>
+        <td>{{ profiling_data['args_dict']['timeliness'] }}</td>
+      </tr>
+    </table>
+
+    {% if profiling_data['done'] %}
+      {% if profiling_data['error'] %}
+      <div class='error'>
+          The request has generated an error: <a href={{ url_for('errorlog', uuid=profiling_data['uuid']) }}>View log</a>
+      </div>
+      {% else %}
+      <div class='info'>
+          Take a look at the log: <a href={{ url_for('errorlog', uuid=profiling_data['uuid']) }}>view log</a>
+      </div>
+      {% endif %}
+   {% endif %}
+</body>

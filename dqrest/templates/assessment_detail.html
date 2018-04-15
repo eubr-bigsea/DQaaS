@@ -1,0 +1,90 @@
+<!doctype html>
+<head>
+<title>DQuality - Assessment details</title>
+<style>
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+    font-family: Sans-Serif;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+.error{
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+color: #FFFFFF;
+background-color: #d30c37;
+}
+
+
+.info{
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+color: #FFFFFF;
+background-color: #4CAF50;
+}
+</style>
+</head>
+<body>
+    <h1>DQAssessment</h1>
+    <h3>{{ assessment_data['uuid'] }}</h3> 
+    <table>
+      <tr>
+        <th>Submitted by:</th>
+        <td>{{ assessment_data['user_id'] }}</td>
+      </tr>
+      <tr>
+        <th>Submit timestamp:</th>
+        <td>{{ assessment_data['submit_timestamp'] }}</td>
+      </tr>
+      <tr>
+        <th>Completion timestamp:</th>
+      {% if assessment_data['done'] %}
+        <td>{{ assessment_data['completed_timestamp'] }}</td>
+      {% else %}
+        <td>STILL IN PROGRESS</td>
+      {% endif %}
+      </tr>
+      <tr>
+        <th>Config file id:</th>
+        <td><a href={{ url_for('config', file_id=assessment_data['file_id']) }}>{{ assessment_data['file_id'] }}</a></td>
+      </tr>
+    </table>
+
+      {% if assessment_data['done'] %}
+      {% if assessment_data['error'] %}
+      <div class='error'>
+          The request has generated an error: <a href={{ url_for('errorlog', uuid=assessment_data['uuid']) }}>view log</a>
+      </div>
+      {% else %}
+      <div class='info'>
+          Take a look at the log: <a href={{ url_for('errorlog', uuid=assessment_data['uuid']) }}>view log</a>
+      </div>
+      {% endif %}
+      {% endif %}
+</body>

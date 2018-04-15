@@ -1,0 +1,7 @@
+{
+    "input": "hdfs://namenode:8020/DQ_demo/data_source/doc1-2017050215.txt",
+    "output": "hdfs://namenode:8020/DQ_demo/result",
+    "timeliness": "17500",
+    "time_format": "%d/%m/%y %H:%M:%S,%f",
+    "consistency_rules": "hdfs://namenode:8020/DQ_demo/association"
+}
